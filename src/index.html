@@ -15,6 +15,19 @@
     <div class="img-wrapper">
       <img class="vue-img" src="assets/img/logo.png">
     </div>
+    <div class="metalzone">
+      <div class="search">
+        <input @keyup.enter="search($event)" :placeholder="searchPlaceholder">
+      </div>
+      <div class="fetching" v-if="fetching">{{loading}}</div>
+      <div class="bands" v-for="band in bands" v-if="!fetching">
+        <div class="metal-band">
+          <div>{{band.name}}</div>
+          <div>{{band.genre}}</div>
+          <div>{{band.country}}</div>
+        </div>
+      </div>
+    </div>
   </div>
 
 </body>
