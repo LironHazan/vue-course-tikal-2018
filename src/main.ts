@@ -8,13 +8,12 @@ new Vue({
   el: '#app-main',
   data: {
     instance: 'Using The Vue Instance',
-    api_key: conf.api_key,
-    searchPlaceholder: 'Hit The F***ing Metal Band Dude!',
+    searchPlaceholder: 'type anything but Friends!',
     fetching: false,
-    loading: '666 Fetching your bands... 666',
-    bands: [],
+    loading: 'Fetching shows...',
+    shows: [],
     bandName: '',
-    wasNotFound: 'was not found 666'
+    wasNotFound: 'was not found'
   },
   computed: {
     notFound: function() {
@@ -25,12 +24,12 @@ new Vue({
     search: function (event) {
       this.bandName = event.target.value;
       this.fetching = true;
-      const api = `http://em.wemakesites.net/search/band_name/${event.target.value}?api_key=${this.api_key}`;
+      const api = `http://api.tvmaze.com/search/shows?q=:${event.target.value}/`;
       axios.get(api)
-        .then(metalbands => {
+        .then(items => {
           this.fetching = false;
-          console.log(metalbands);
-          this.bands = metalbands.data.data.search_results;
+          console.log(items.data.map(item => item.show));
+          this.shows = items.data ? items.data.map(item => item.show) : [];
         }, err => console.log(err));
     }
   }
