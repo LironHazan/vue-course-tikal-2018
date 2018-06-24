@@ -15,26 +15,18 @@ import axios, { AxiosResponse } from 'axios';
     'b-row': bRow,
     'show': ShowComponent
   },
-  data() {
-    return {
-      shows: [],
-      searchPlaceholder: 'SEARCH SHOW!',
-    };
-  },
-  methods: {
-    search: function (event) {
-      const api = `http://api.tvmaze.com/search/shows?q=:${event.target.value}/`;
-      axios.get(api)
-        .then(items => {
-          console.log(items.data.map(item => item.show));
-          this.shows = items.data ? items.data.map(item => item.show) : [];
-        }, err => console.log(err));
-    }
-  }
 })
 export class ShowsComponent extends Vue {
   shows = [];
+  searchPlaceholder = 'search';
   constructor () {
     super();
   }
+  search (event) {
+    const api = `http://api.tvmaze.com/search/shows?q=:${event.target.value}/`;
+    axios.get(api)
+    .then(items => {
+      this.shows = items.data ? items.data.map(item => item.show) : [];
+    }, err => console.log(err));
+}
 }
