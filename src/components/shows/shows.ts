@@ -19,6 +19,7 @@ import axios, { AxiosResponse } from 'axios';
 export class ShowsComponent extends Vue {
   shows = [];
   searchPlaceholder = 'search';
+  opacityOn = false;
   constructor () {
     super();
   }
@@ -29,4 +30,9 @@ export class ShowsComponent extends Vue {
       this.shows = items.data ? items.data.map(item => item.show) : [];
     }, err => console.log(err));
 }
+
+  onShowClicked (value) {
+    this.opacityOn = !this.opacityOn;
+    alert(value);
+  }
 }

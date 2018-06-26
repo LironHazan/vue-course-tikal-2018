@@ -6,7 +6,7 @@
       </div>
       <div>
         <div class="show" v-for="show in shows">
-          <show :show="show"></show>
+          <show :show="show" v-on:page-opacity="onShowClicked" v-bind:class="{ 'grayed-opacity-bg': opacityOn }">></show>
         </div>
       </div>
     </b-col>
