@@ -3,7 +3,7 @@ import { Component, Vue } from 'vue-property-decorator';
 @Component({
   template: `
   <div>
-      <h3 class="show-title">{{show.name}}</h3>
+     <router-link :to="'/play/' + show.id"><h3 class="show-title">{{show.name}}</h3></router-link>
       <div><img :src="show.image.medium" v-on:click="onClick" alt=""/></div>
       <div v-html="show.summary"></div>
   </div>`,
